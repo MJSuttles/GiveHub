@@ -10,8 +10,7 @@ namespace GiveHub.Models
     public string UserUid { get; set; }
 
     [ForeignKey("Charity")]
-    public int EventId { get; set; } // This is the CharityId
-
+    public int CharityId { get; set; }
     [Required]
     public string Name { get; set; }
 

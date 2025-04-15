@@ -17,6 +17,36 @@ namespace GiveHub.Endpoint
       var group = routes.MapGroup("/api/charities").WithTags(nameof(Charity));
 
       // API calls
+
+      // example
+
+      // group.MapGet("/", async (ISimplyBooksAuthorService simplyBooksAuthorService) =>
+      // {
+      //   return await simplyBooksAuthorService.GetAllAuthorsAsync();
+      // })
+      // .WithName("GetAllAuthors")
+      // .WithOpenApi()
+      // .Produces<List<Author>>(StatusCodes.Status200OK);
+
+      // Status StatusCodes
+
+      // GET Calls:
+
+      // .Produces<List<Author>>(StatusCodes.Status200OK);
+
+      // POST Calls:
+
+      // .Produces<Author>(StatusCodes.Status201Created)
+      // .Produces(StatusCodes.Status400BadRequest);
+
+      // PUT Calls:
+
+      // .Produces<Author>(StatusCodes.Status201Created)
+      // .Produces(StatusCodes.Status400BadRequest);
+
+      // DELETE Calls:
+
+      // .Produces<Author>(StatusCodes.Status204NoContent);
     }
   }
 }
