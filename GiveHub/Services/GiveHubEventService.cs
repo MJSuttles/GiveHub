@@ -32,4 +32,11 @@ namespace GiveHub.Services
     // Task<T> is a task that returns a value.
     // To get the value, we use the await keyword.
 
-// seed data
+    // seed data
+
+    // public async Task<List<Author>> GetAllAuthorsAsync()
+    // {
+    //   return await _simplyBooksAuthorRepository.GetAllAuthorsAsync();
+    // }
+  }
+}
