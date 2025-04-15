@@ -47,29 +47,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+// Here we are calling the extension method MapWeatherEndpoints() to map the weather endpoints.
+// The extension method is defined in the WeatherForecastEndpoints class.
+// The extension method is a static method that extends the IEndpointRouteBuilder interface.
+// The extension method is used to group related endpoints together.
+// An extension method is a special kind of static method that is used to add new functionality to existing types.
+// A static method is a method that belongs to the class itself, not to instances of the class.
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.MapCharityEndpoints();
+app.MapEventEndpoints();
+app.MapTagEndpoints();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
