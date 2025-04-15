@@ -2,7 +2,7 @@ using GiveHub.Interfaces;
 using GiveHub.Models;
 using GiveHub.Repositories;
 
-namespace SimplyBooks.Services
+namespace GiveHub.Services
 {
   public class GiveHubTagService : IGiveHubTagService
   {
