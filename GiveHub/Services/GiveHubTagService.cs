@@ -14,5 +14,12 @@ namespace GiveHub.Services
     }
 
     // seed data
+
+    // example
+
+    // public async Task<List<Author>> GetAllAuthorsAsync()
+    // {
+    //   return await _simplyBooksAuthorRepository.GetAllAuthorsAsync();
+    // }
   }
 }
