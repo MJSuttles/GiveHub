@@ -35,7 +35,7 @@ namespace GiveHub.Models
 
     public string Website { get; set; }
 
-    public int Donations { get; set; }
+    public decimal Donations { get; set; }
 
     public int Stars { get; set; }
 
