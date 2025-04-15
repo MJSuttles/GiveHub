@@ -1,3 +1,9 @@
+name: 📝 Issue Ticket
+about: Use this template to create a new feature or bug ticket
+title: "[Ticket] "
+labels: enhancement
+assignees:
+
 <!--- Provide a general summary of the issue in the Title above -->
 <!--- DELETE ALL COMMENTS BEFORE CREATING ISSUE -->
 
