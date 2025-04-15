@@ -1,7 +1,7 @@
 using GiveHub.Interfaces;
 using GiveHub.Models;
 
-namespace SimplyBooks.Endpoint
+namespace GiveHub.Endpoint
 {
   public static class CharityEndpoints
   {
