@@ -18,6 +18,55 @@ namespace GiveHub.Endpoint
 
       // API calls
 
+      group.MapGet("/", async (IGiveHubCharityService giveHubCharityService) =>
+      {
+        return await giveHubCharityService.GetAllCharitiesAsync();
+      })
+      .WithName("GetAllCharities")
+      .WithOpenApi()
+      .Produces<List<Charity>>(StatusCodes.Status200OK);
+
+      group.MapGet("/{id}", async (int id, IGiveHubCharityService giveHubCharityService) =>
+      {
+        return await giveHubCharityService.GetCharityByIdAsync(id);
+      })
+      .WithName("GetCharityById")
+      .WithOpenApi()
+      .Produces<Charity>(StatusCodes.Status200OK);
+
+      group.MapGet("/uid/{uid}", async (string uid, IGiveHubCharityService giveHubCharityService) =>
+      {
+        return await giveHubCharityService.GetCharityByUidAsync(uid);
+      })
+      .WithName("GetCharityByUid")
+      .WithOpenApi()
+      .Produces<Charity>(StatusCodes.Status200OK);
+      
+      group.MapPost("/", async (Charity charity, IGiveHubCharityService giveHubCharityService) =>
+      {
+        return await giveHubCharityService.CreateCharityAsync(charity);
+      })
+      .WithName("CreateCharity")
+      .WithOpenApi()
+      .Produces<Charity>(StatusCodes.Status201Created)
+      .Produces(StatusCodes.Status400BadRequest);
+
+      group.MapPut("/{id}", async (int id, Charity charity, IGiveHubCharityService giveHubCharityService) =>
+      {
+        return await giveHubCharityService.UpdateCharityAsync(id, charity);
+      })
+      .WithName("UpdateCharity")
+      .WithOpenApi()
+      .Produces<Charity>(StatusCodes.Status200OK)
+      .Produces(StatusCodes.Status400BadRequest);
+
+      group.MapDelete("/{id}", async (int id, IGiveHubCharityService giveHubCharityService) =>
+      {
+        return await giveHubCharityService.DeleteCharityAsync(id);
+      })
+      .WithName("DeleteCharity")
+      .WithOpenApi()
+      .Produces<Charity>(StatusCodes.Status204NoContent);
       // example
 
       // group.MapGet("/", async (ISimplyBooksAuthorService simplyBooksAuthorService) =>

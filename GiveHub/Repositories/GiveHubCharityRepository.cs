@@ -30,6 +30,59 @@ namespace GiveHub.Repositories
     //   return await _context.Authors.ToListAsync();
     // }
 
+    public async Task<List<Charity>> GetAllCharitiesAsync()
+    {
+      return await _context.Charities.ToListAsync();
+    }
+
+    public async Task<Charity> GetCharityByIdAsync(int id)
+    {
+      return await _context.Charities.FindAsync(id);
+    }
+    
+    public async Task<Charity> GetCharityByUidAsync(string uid)
+    {
+      return await _context.Charities.FirstOrDefaultAsync(c => c.UserUid == uid);
+    }
+    
+    public async Task<Charity> CreateCharityAsync(Charity charity)
+    {
+      _context.Charities.Add(charity);
+      await _context.SaveChangesAsync();
+      return charity;
+    }
+
+    public async Task<Charity> UpdateCharityAsync(int id, Charity charity)
+    {
+      var existingCharity = await _context.Charities.FindAsync(id);
+      if (existingCharity == null)
+      {
+        return null;
+      }
+      existingCharity.Name = charity.Name;
+      existingCharity.Description = charity.Description;
+      existingCharity.Owners = charity.Owners;
+      existingCharity.Image = charity.Image;
+      existingCharity.Website = charity.Website;
+      existingCharity.UserUid = charity.UserUid;
+
+      await _context.SaveChangesAsync();
+      return charity;
+    }
+
+
+    public async Task<Charity> DeleteCharityAsync(int id)
+    {
+      var charity = await _context.Charities.FindAsync(id);
+      if (charity != null)
+      {
+        _context.Charities.Remove(charity);
+        await _context.SaveChangesAsync();
+        return charity;
+      }
+      return null;
+    }
+
     // // Get authors by user
     // public async Task<List<Author>> GetAuthorsByUserAsync(int userId)
     // {

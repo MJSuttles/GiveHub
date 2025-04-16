@@ -14,5 +14,9 @@ namespace GiveHub.Interfaces
     // example
 
     // Task<List<Author>> GetAllAuthorsAsync();
+    Task<List<Event>> GetEventsByCharityIdAsync(int charityId);
+    Task<Event> CreateEventAsync(Event eventEntity);
+    Task<Event> UpdateEventAsync(int id, Event eventEntity);
+    Task<Event> DeleteEventAsync(int id);
   }
 }
