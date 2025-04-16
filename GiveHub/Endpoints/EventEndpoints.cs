@@ -18,6 +18,40 @@ namespace GiveHub.Endpoint
 
       // API calls
 
+      group.MapGet("/charity/{charityId}", async (int charityId, IGiveHubEventService giveHubEventService) =>
+      {
+        return await giveHubEventService.GetEventsByCharityIdAsync(charityId);
+      })
+      .WithName("GetEventsByCharityId")
+      .WithOpenApi()
+      .Produces<List<Event>>(StatusCodes.Status200OK);
+
+      group.MapPost("/", async (Event eventEntity, IGiveHubEventService giveHubEventService) =>
+      {
+        return await giveHubEventService.CreateEventAsync(eventEntity);
+      })
+      .WithName("CreateEvent")
+      .WithOpenApi()
+      .Produces<Event>(StatusCodes.Status201Created);
+      // .Produces(StatusCodes.Status400BadRequest);
+      
+      group.MapPut("/{id}", async (int id, Event eventEntity, IGiveHubEventService giveHubEventService) =>
+      {
+        return await giveHubEventService.UpdateEventAsync(id, eventEntity);
+      })
+      .WithName("UpdateEvent")
+      .WithOpenApi()
+      .Produces<Event>(StatusCodes.Status200OK)
+      .Produces(StatusCodes.Status400BadRequest);
+
+      group.MapDelete("/{id}", async (int id, IGiveHubEventService giveHubEventService) =>
+      {
+        return await giveHubEventService.DeleteEventAsync(id);
+      })
+      .WithName("DeleteEvent")
+      .WithOpenApi()
+      .Produces<Event>(StatusCodes.Status204NoContent);
+
       // example
 
       // group.MapGet("/", async (ISimplyBooksAuthorService simplyBooksAuthorService) =>

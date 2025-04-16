@@ -34,6 +34,35 @@ namespace GiveHub.Services
 
     // seed data
 
+    public async Task<List<Charity>> GetAllCharitiesAsync()
+    {
+      return await _giveHubCharityRepository.GetAllCharitiesAsync();
+    }
+
+    public async Task<Charity> GetCharityByIdAsync(int id)
+    {
+      return await _giveHubCharityRepository.GetCharityByIdAsync(id);
+    }
+
+    public async Task<Charity> GetCharityByUidAsync(string uid)
+    {
+      return await _giveHubCharityRepository.GetCharityByUidAsync(uid);
+    }
+
+    public async Task<Charity> CreateCharityAsync(Charity charity)
+    {
+      return await _giveHubCharityRepository.CreateCharityAsync(charity);
+    }
+
+    public async Task<Charity> UpdateCharityAsync(int id, Charity charity)
+    {
+      return await _giveHubCharityRepository.UpdateCharityAsync(id, charity);
+    }
+
+    public async Task<Charity> DeleteCharityAsync(int id)
+    {
+      return await _giveHubCharityRepository.DeleteCharityAsync(id);
+    }
     // example
 
     // public async Task<List<Author>> GetAllAuthorsAsync()

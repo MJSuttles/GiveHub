@@ -13,9 +13,9 @@ namespace GiveHub.Data
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.Entity<Charity>().HasData(CharityData.Charity);
-      modelBuilder.Entity<Event>().HasData(EventData.Event);
-      modelBuilder.Entity<Tag>().HasData(TagData.Tag);
+      modelBuilder.Entity<Charity>().HasData(CharityData.Charities);
+      modelBuilder.Entity<Event>().HasData(EventData.Events);
+      // modelBuilder.Entity<Tag>().HasData(TagData.Tag);
     }
   }
 }
