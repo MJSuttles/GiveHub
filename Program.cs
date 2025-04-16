@@ -1,29 +1,28 @@
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.EntityFrameworkCore;
 using GiveHub.Data;
 using GiveHub.Endpoint;
 using GiveHub.Interfaces;
 using GiveHub.Repositories;
 using GiveHub.Services;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-// allows passing datimes without time zone data
-AppContext.SetSwitch("Npgsql.EnablelegacyTimestampBehavior", true);
+// ✅ Enables legacy timestamp behavior (for compatibility with DateTime)
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-// allows our api endpoints to access the data through Entity Framework Configure
-builder.Services.AddNpgsql<GiveHubDbContext>(builder.Configuration["GiveHubConnectionString"]);
+// ✅ Configure EF Core to use Npgsql with the connection string from appsettings.json or user secrets
+builder.Services.AddDbContext<GiveHubDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("BrianDb")));
 
-// Set the JSON serializer options
-builder.Services.Configure<JsonOptions>(options => { options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; });
+// ✅ Set the JSON serializer to avoid circular reference issues
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
-// Here we are registering the services and repositories with the DI container.
-// The DI container will inject the services and repositories into the endpoints (controllers).
-// DI (Dependency Injection) is a design pattern that allows us to develop loosely coupled code.
-// Loosely coupled code is code where the classes and objects are independent of each other.
-// This makes the code easier to maintain, test, and extend.
-
+// ✅ Register repositories and services for dependency injection
 builder.Services.AddScoped<IGiveHubCharityRepository, GiveHubCharityRepository>();
 builder.Services.AddScoped<IGiveHubCharityService, GiveHubCharityService>();
 builder.Services.AddScoped<IGiveHubEventRepository, GiveHubEventRepository>();
@@ -31,29 +30,23 @@ builder.Services.AddScoped<IGiveHubEventService, GiveHubEventService>();
 builder.Services.AddScoped<IGiveHubTagRepository, GiveHubTagRepository>();
 builder.Services.AddScoped<IGiveHubTagService, GiveHubTagService>();
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// ✅ Swagger / API docs setup
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// ✅ Enable Swagger UI in development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// ✅ Middleware setup
 app.UseHttpsRedirection();
 
-// Here we are calling the extension method MapWeatherEndpoints() to map the weather endpoints.
-// The extension method is defined in the WeatherForecastEndpoints class.
-// The extension method is a static method that extends the IEndpointRouteBuilder interface.
-// The extension method is used to group related endpoints together.
-// An extension method is a special kind of static method that is used to add new functionality to existing types.
-// A static method is a method that belongs to the class itself, not to instances of the class.
-
+// ✅ Map endpoint groups (routes)
 app.MapCharityEndpoints();
 app.MapEventEndpoints();
 app.MapTagEndpoints();
