@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GiveHub.Migrations
 {
     [DbContext(typeof(GiveHubDbContext))]
-    [Migration("20250416011748_InitialCreate")]
+    [Migration("20250416020712_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -266,7 +266,7 @@ namespace GiveHub.Migrations
                             ContactEmail = "alice@hopeforall.org",
                             ContactName = "Alice Johnson",
                             ContactPhone = "555-123-4567",
-                            Date = new DateTime(2025, 8, 10, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2025, 5, 15, 13, 30, 0, 0, DateTimeKind.Utc),
                             Description = "Providing school supplies to children in need.",
                             Image = "https://example.com/images/schooldrive.jpg",
                             Name = "Back-to-School Drive",
@@ -283,7 +283,7 @@ namespace GiveHub.Migrations
                             ContactEmail = "brian@greenearth.org",
                             ContactName = "Brian Meadows",
                             ContactPhone = "555-765-4321",
-                            Date = new DateTime(2025, 4, 22, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2025, 5, 15, 13, 30, 0, 0, DateTimeKind.Utc),
                             Description = "Community tree planting initiative.",
                             Image = "https://example.com/images/trees.jpg",
                             Name = "Tree Planting Day",
@@ -300,7 +300,7 @@ namespace GiveHub.Migrations
                             ContactEmail = "catherine@foodforward.org",
                             ContactName = "Catherine Lee",
                             ContactPhone = "555-789-0000",
-                            Date = new DateTime(2025, 5, 15, 13, 30, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2025, 5, 15, 13, 30, 0, 0, DateTimeKind.Utc),
                             Description = "Volunteers needed for distributing donated food.",
                             Image = "https://example.com/images/food.jpg",
                             Name = "Food Distribution Weekend",
@@ -317,7 +317,7 @@ namespace GiveHub.Migrations
                             ContactEmail = "david@booksforkids.org",
                             ContactName = "David Chen",
                             ContactPhone = "555-321-7890",
-                            Date = new DateTime(2025, 6, 12, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2025, 5, 15, 13, 30, 0, 0, DateTimeKind.Utc),
                             Description = "Raising funds by reading books for donations.",
                             Image = "https://example.com/images/readathon.jpg",
                             Name = "Read-a-Thon Fundraiser",
@@ -334,7 +334,7 @@ namespace GiveHub.Migrations
                             ContactEmail = "erika@safehaven.org",
                             ContactName = "Erika Martinez",
                             ContactPhone = "555-456-9999",
-                            Date = new DateTime(2025, 7, 3, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2025, 5, 15, 13, 30, 0, 0, DateTimeKind.Utc),
                             Description = "Connecting homeless individuals with resources.",
                             Image = "https://example.com/images/outreach.jpg",
                             Name = "Homeless Outreach Day",
