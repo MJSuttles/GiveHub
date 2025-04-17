@@ -25,10 +25,14 @@ namespace GiveHub.Services
       _giveHubEventRepository = giveHubEventRepository;
     }
 
-    public async Task<List<Event>> GetEventsByCharityIdAsync(int charityId)
-    {
-      return await _giveHubEventRepository.GetEventsByCharityIdAsync(charityId);
-    }
+    // async means that the method is asynchronous.
+    // async methods can be awaited using the await keyword.
+    // async methods return a Task or Task<T>.
+    // Task represents an asynchronous operation that can return a value.
+    // Task<T> is a task that returns a value.
+    // To get the value, we use the await keyword.
+
+    // seed data
 
     public async Task<Event> CreateEventAsync(Event eventEntity)
     {
@@ -44,19 +48,5 @@ namespace GiveHub.Services
     {
       return await _giveHubEventRepository.DeleteEventAsync(id);
     }
-
-    // async means that the method is asynchronous.
-    // async methods can be awaited using the await keyword.
-    // async methods return a Task or Task<T>.
-    // Task represents an asynchronous operation that can return a value.
-    // Task<T> is a task that returns a value.
-    // To get the value, we use the await keyword.
-
-    // seed data
-
-    // public async Task<List<Author>> GetAllAuthorsAsync()
-    // {
-    //   return await _simplyBooksAuthorRepository.GetAllAuthorsAsync();
-    // }
   }
 }

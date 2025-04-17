@@ -34,7 +34,7 @@ namespace GiveHub.Endpoint
       .WithOpenApi()
       .Produces<Event>(StatusCodes.Status201Created);
       // .Produces(StatusCodes.Status400BadRequest);
-      
+
       group.MapPut("/{id}", async (int id, Event eventEntity, IGiveHubEventService giveHubEventService) =>
       {
         return await giveHubEventService.UpdateEventAsync(id, eventEntity);
@@ -51,36 +51,6 @@ namespace GiveHub.Endpoint
       .WithName("DeleteEvent")
       .WithOpenApi()
       .Produces<Event>(StatusCodes.Status204NoContent);
-
-      // example
-
-      // group.MapGet("/", async (ISimplyBooksAuthorService simplyBooksAuthorService) =>
-      // {
-      //   return await simplyBooksAuthorService.GetAllAuthorsAsync();
-      // })
-      // .WithName("GetAllAuthors")
-      // .WithOpenApi()
-      // .Produces<List<Author>>(StatusCodes.Status200OK);
-
-      // Status StatusCodes
-
-      // GET Calls:
-
-      // .Produces<List<Author>>(StatusCodes.Status200OK);
-
-      // POST Calls:
-
-      // .Produces<Author>(StatusCodes.Status201Created)
-      // .Produces(StatusCodes.Status400BadRequest);
-
-      // PUT Calls:
-
-      // .Produces<Author>(StatusCodes.Status201Created)
-      // .Produces(StatusCodes.Status400BadRequest);
-
-      // DELETE Calls:
-
-      // .Produces<Author>(StatusCodes.Status204NoContent);
     }
   }
 }

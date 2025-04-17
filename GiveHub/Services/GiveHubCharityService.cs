@@ -39,12 +39,12 @@ namespace GiveHub.Services
       return await _giveHubCharityRepository.GetAllCharitiesAsync();
     }
 
-    public async Task<Charity> GetCharityByIdAsync(int id)
+    public async Task<Charity?> GetCharityByIdAsync(int id)
     {
       return await _giveHubCharityRepository.GetCharityByIdAsync(id);
     }
 
-    public async Task<Charity> GetCharityByUidAsync(string uid)
+    public async Task<Charity?> GetCharityByUidAsync(string uid)
     {
       return await _giveHubCharityRepository.GetCharityByUidAsync(uid);
     }
@@ -63,11 +63,5 @@ namespace GiveHub.Services
     {
       return await _giveHubCharityRepository.DeleteCharityAsync(id);
     }
-    // example
-
-    // public async Task<List<Author>> GetAllAuthorsAsync()
-    // {
-    //   return await _simplyBooksAuthorRepository.GetAllAuthorsAsync();
-    // }
   }
 }
