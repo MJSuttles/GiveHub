@@ -3,6 +3,7 @@ using System;
 using GiveHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GiveHub.Migrations
 {
     [DbContext(typeof(GiveHubDbContext))]
-    partial class GiveHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250416233523_CharityTags3")]
+    partial class CharityTags3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,28 +206,6 @@ namespace GiveHub.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("CharityTags");
-
-                    b.HasData(
-                        new
-                        {
-                            CharityId = 1,
-                            TagId = 1
-                        },
-                        new
-                        {
-                            CharityId = 1,
-                            TagId = 5
-                        },
-                        new
-                        {
-                            CharityId = 2,
-                            TagId = 2
-                        },
-                        new
-                        {
-                            CharityId = 3,
-                            TagId = 3
-                        });
                 });
 
             modelBuilder.Entity("GiveHub.Models.Event", b =>
@@ -394,33 +375,6 @@ namespace GiveHub.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Education"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Environment"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Food Security"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Healthcare"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Youth Empowerment"
-                        });
                 });
 
             modelBuilder.Entity("GiveHub.Models.CharityTag", b =>

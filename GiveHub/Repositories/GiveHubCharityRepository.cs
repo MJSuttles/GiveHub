@@ -32,17 +32,26 @@ namespace GiveHub.Repositories
 
     public async Task<List<Charity>> GetAllCharitiesAsync()
     {
-      return await _context.Charities.ToListAsync();
+    return await _context.Charities             // load the related Events
+        .Include(c => c.CharityTags)                // load the join entities…
+          .ThenInclude(ct => ct.Tag)               // …and then the Tag on each join
+        .ToListAsync();
     }
 
     public async Task<Charity> GetCharityByIdAsync(int id)
     {
-      return await _context.Charities.FindAsync(id);
+        return await _context.Charities
+        .Include(c => c.CharityTags)              // load the join‐entities
+            .ThenInclude(ct => ct.Tag)            // and then each Tag
+        .FirstOrDefaultAsync(c => c.Id == id);    // filter by your id
     }
     
     public async Task<Charity> GetCharityByUidAsync(string uid)
     {
-      return await _context.Charities.FirstOrDefaultAsync(c => c.UserUid == uid);
+      return await _context.Charities
+        .Include(c => c.CharityTags)                // load the join entities…
+        .ThenInclude(ct => ct.Tag)               // …and then the Tag on each join
+        .FirstOrDefaultAsync(c => c.UserUid == uid);
     }
     
     public async Task<Charity> CreateCharityAsync(Charity charity)

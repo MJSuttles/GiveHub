@@ -10,5 +10,6 @@ namespace GiveHub.Models
 
     [Required]
     public string Name { get; set; }
+    public List<CharityTag> CharityTags { get; set; }
   }
 }
