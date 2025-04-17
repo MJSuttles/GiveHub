@@ -14,6 +14,9 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // ✅ Configure EF Core to use Npgsql with the connection string from appsettings.json or user secrets
 builder.Services.AddDbContext<GiveHubDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("MaxDb")));
+
+builder.Services.AddDbContext<GiveHubDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("BrianDb")));
 
 // ✅ Set the JSON serializer to avoid circular reference issues

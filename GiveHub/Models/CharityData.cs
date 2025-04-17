@@ -40,7 +40,7 @@ namespace GiveHub.Models
     public int Stars { get; set; }
 
     // Navigation properties
-    public List<Tag>? Tags { get; set; }
+    public List<CharityTag> CharityTags { get; set; }
 
     public List<Event>? Events { get; set; }
   }
