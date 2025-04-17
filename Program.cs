@@ -14,10 +14,10 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Get the connection string by name (uses Development override if present)
 builder.Services.AddDbContext<GiveHubDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("GiveHubDb")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("GiveHub")));
 
 // Optional debug output
-Console.WriteLine("Connection String: " + builder.Configuration.GetConnectionString("GiveHubDb"));
+Console.WriteLine("Connection String: " + builder.Configuration.GetConnectionString("GiveHub"));
 
 // JSON options to prevent circular reference issues
 builder.Services.Configure<JsonOptions>(options =>

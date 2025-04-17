@@ -34,6 +34,11 @@ namespace GiveHub.Services
 
     // seed data
 
+    public async Task<List<Event>> GetEventsByCharityIdAsync(int charityId)
+    {
+      return await _giveHubEventRepository.GetEventsByCharityIdAsync(charityId);
+    }
+
     public async Task<Event> CreateEventAsync(Event eventEntity)
     {
       return await _giveHubEventRepository.CreateEventAsync(eventEntity);
