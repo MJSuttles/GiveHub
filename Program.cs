@@ -25,6 +25,18 @@ builder.Services.Configure<JsonOptions>(options =>
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
+// ✅ Register CORS policy BEFORE builder.Build()
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:3000") // Frontend origin
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 // Register repositories and services
 builder.Services.AddScoped<IGiveHubCharityRepository, GiveHubCharityRepository>();
 builder.Services.AddScoped<IGiveHubCharityService, GiveHubCharityService>();
@@ -37,6 +49,7 @@ builder.Services.AddScoped<IGiveHubTagService, GiveHubTagService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// ✅ Now we can build the app
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -46,6 +59,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// ✅ Use CORS AFTER building the app
+app.UseCors();
 
 app.MapCharityEndpoints();
 app.MapEventEndpoints();
