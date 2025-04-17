@@ -22,8 +22,6 @@ namespace GiveHub.Repositories
 
     // seed data
 
-    // examples
-
     public async Task<List<Event>> GetEventsByCharityIdAsync(int charityId)
     {
       return await _context.Events.Where(e => e.CharityId == charityId).ToListAsync();
@@ -68,20 +66,5 @@ namespace GiveHub.Repositories
       await _context.SaveChangesAsync();
       return existingEvent;
     }
-
-    // Get authors
-    // public async Task<List<Author>> GetAllAuthorsAsync()
-    // {
-    //   return await _context.Authors.ToListAsync();
-    // }
-
-    // // Get authors by user
-    // public async Task<List<Author>> GetAuthorsByUserAsync(int userId)
-    // {
-    //   return await _context.Authors
-    //           .Where(a => a.UserId == userId)
-    //           .Include(a => a.Books)
-    //           .ToListAsync();
-    // }
   }
 }

@@ -21,39 +21,30 @@ namespace GiveHub.Repositories
     }
 
     // seed data
-
-    // examples
-
-    // Get authors
-    // public async Task<List<Author>> GetAllAuthorsAsync()
-    // {
-    //   return await _context.Authors.ToListAsync();
-    // }
-
     public async Task<List<Charity>> GetAllCharitiesAsync()
     {
-    return await _context.Charities             // load the related Events
-        .Include(c => c.CharityTags)                // load the join entities…
-          .ThenInclude(ct => ct.Tag)               // …and then the Tag on each join
-        .ToListAsync();
+      return await _context.Charities
+          .Include(c => c.CharityTags)
+          .ThenInclude(ct => ct.Tag)
+          .ToListAsync();
     }
 
-    public async Task<Charity> GetCharityByIdAsync(int id)
-    {
-        return await _context.Charities
-        .Include(c => c.CharityTags)              // load the join‐entities
-            .ThenInclude(ct => ct.Tag)            // and then each Tag
-        .FirstOrDefaultAsync(c => c.Id == id);    // filter by your id
-    }
-    
-    public async Task<Charity> GetCharityByUidAsync(string uid)
+    public async Task<Charity?> GetCharityByIdAsync(int id)
     {
       return await _context.Charities
-        .Include(c => c.CharityTags)                // load the join entities…
-        .ThenInclude(ct => ct.Tag)               // …and then the Tag on each join
+      .Include(c => c.CharityTags)
+      .ThenInclude(ct => ct.Tag)
+      .FirstOrDefaultAsync(c => c.Id == id);
+    }
+
+    public async Task<Charity?> GetCharityByUidAsync(string uid)
+    {
+      return await _context.Charities
+        .Include(c => c.CharityTags)
+        .ThenInclude(ct => ct.Tag)
         .FirstOrDefaultAsync(c => c.UserUid == uid);
     }
-    
+
     public async Task<Charity> CreateCharityAsync(Charity charity)
     {
       _context.Charities.Add(charity);
@@ -79,7 +70,6 @@ namespace GiveHub.Repositories
       return charity;
     }
 
-
     public async Task<Charity> DeleteCharityAsync(int id)
     {
       var charity = await _context.Charities.FindAsync(id);
@@ -91,14 +81,5 @@ namespace GiveHub.Repositories
       }
       return null;
     }
-
-    // // Get authors by user
-    // public async Task<List<Author>> GetAuthorsByUserAsync(int userId)
-    // {
-    //   return await _context.Authors
-    //           .Where(a => a.UserId == userId)
-    //           .Include(a => a.Books)
-    //           .ToListAsync();
-    // }
   }
 }

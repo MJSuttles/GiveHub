@@ -12,7 +12,7 @@ namespace GiveHub.Models
     [Required]
     public string Name { get; set; }
 
-    public string Owners { get; set; } // Fixed property name
+    public string Owners { get; set; }
 
     public string Image { get; set; }
 
