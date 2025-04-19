@@ -16,13 +16,21 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddDbContext<GiveHubDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("GiveHub")));
 
-// builder.Services.AddDbContext<GiveHubDbContext>(options =>
-//     options.UseNpgsql(builder.Configuration.GetConnectionString("BrianDb")));
-
 // ✅ Set the JSON serializer to avoid circular reference issues
 builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
+
+// ✅ Add CORS policy to allow React frontend access
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:3000") // React dev server
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
 });
 
 // ✅ Register repositories and services for dependency injection
@@ -48,8 +56,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// ✅ Middleware setup
 app.UseHttpsRedirection();
+
+// ✅ Apply the CORS policy here (before mapping endpoints)
+app.UseCors();
 
 // ✅ Map endpoint groups (routes)
 app.MapCharityEndpoints();
