@@ -2,7 +2,7 @@ using GiveHub.Models;
 
 namespace GiveHub.Interfaces
 {
-  public interface IGiveHubTagRepository
+  public interface IGiveHubCharityTagService
   {
     // An interface is a contract that defines the signature of the functionality.
     // It defines a set of methods that a class that inherits the interface MUST implement.
@@ -12,7 +12,7 @@ namespace GiveHub.Interfaces
     // seed categories
 
     // example
-
-    Task<List<Tag>> GetAllTagsAsync();
+    // Task<List<Author>> GetAllAuthorsAsync();
+    Task<CharityTag> CreateCharityTagAsync(CharityTag charityTag);
   }
 }

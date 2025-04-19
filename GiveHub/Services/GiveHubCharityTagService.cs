@@ -4,14 +4,14 @@ using GiveHub.Repositories;
 
 namespace GiveHub.Services
 {
-  public class GiveHubTagService : IGiveHubTagService
+  public class GiveHubCharityTagService : IGiveHubCharityTagService
   {
     // The service layer is responsible for processing business logic.
     // Right now, the service layer is just calling the repository layer.
     // The service layer will call the repository layer to do the actual CRUD operations.
     // The service layer will return the data to the endpoint (controller).
 
-    private readonly IGiveHubTagRepository _giveHubTagRepository;
+    private readonly IGiveHubCharityTagRepository _giveHubCharityTagRepository;
 
     // This constructor is used for dependency injection.
     // We are injecting the ISimplyBooksAuthorRepository interface into the SimplyBooksAuthorRepository class.
@@ -20,14 +20,14 @@ namespace GiveHub.Services
     // It also makes our code more flexible and easier to maintain.
     // The type of DI used here is called constructor injection.
 
-    public GiveHubTagService(IGiveHubTagRepository giveHubTagRepository)
+    public GiveHubCharityTagService(IGiveHubCharityTagRepository giveHubCharityTagRepository)
     {
-      _giveHubTagRepository = giveHubTagRepository;
+      _giveHubCharityTagRepository = giveHubCharityTagRepository;
     }
 
-    public async Task<List<Tag>> GetAllTagsAsync()
+    public async Task<CharityTag> CreateCharityTagAsync(CharityTag charityTag)
     {
-      return await _giveHubTagRepository.GetAllTagsAsync();
+      return await _giveHubCharityTagRepository.CreateCharityTagAsync(charityTag);
     }
 
 

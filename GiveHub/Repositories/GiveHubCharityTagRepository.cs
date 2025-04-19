@@ -5,7 +5,7 @@ using GiveHub.Models;
 
 namespace GiveHub.Repositories
 {
-  public class GiveHubTagRepository : IGiveHubTagRepository
+  public class GiveHubCharityTagRepository : IGiveHubCharityTagRepository
   {
     // The repository layer is responsible for CRUD operations.
     // This repository class implements the IWeatherForecastRepository interface.
@@ -15,14 +15,16 @@ namespace GiveHub.Repositories
 
     private readonly GiveHubDbContext _context;
 
-    public GiveHubTagRepository(GiveHubDbContext context)
+    public GiveHubCharityTagRepository(GiveHubDbContext context)
     {
       _context = context;
     }
 
-    public async Task<List<Tag>> GetAllTagsAsync()
+    public async Task<CharityTag> CreateCharityTagAsync(CharityTag charityTag)
     {
-      return await _context.Tags.ToListAsync();
+      _context.CharityTags.Add(charityTag);
+      await _context.SaveChangesAsync();
+      return charityTag;
     }
 
     
