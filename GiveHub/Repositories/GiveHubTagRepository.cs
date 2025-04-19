@@ -22,7 +22,9 @@ namespace GiveHub.Repositories
 
     public async Task<List<Tag>> GetAllTagsAsync()
     {
-      return await _context.Tags.ToListAsync();
+      return await _context.Tags
+        .Include(t => t.CharityTags)
+        .ToListAsync();
     }
 
     

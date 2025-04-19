@@ -24,6 +24,7 @@ namespace GiveHub.Repositories
     public async Task<List<Charity>> GetAllCharitiesAsync()
     {
       return await _context.Charities
+          .Include(e => e.Events)
           .Include(c => c.CharityTags)
           .ThenInclude(ct => ct.Tag)
           .ToListAsync();
@@ -32,6 +33,7 @@ namespace GiveHub.Repositories
     public async Task<Charity?> GetCharityByIdAsync(int id)
     {
       return await _context.Charities
+      .Include(e => e.Events)
       .Include(c => c.CharityTags)
       .ThenInclude(ct => ct.Tag)
       .FirstOrDefaultAsync(c => c.Id == id);
@@ -40,6 +42,7 @@ namespace GiveHub.Repositories
     public async Task<Charity?> GetCharityByUidAsync(string uid)
     {
       return await _context.Charities
+        .Include(e => e.Events)
         .Include(c => c.CharityTags)
         .ThenInclude(ct => ct.Tag)
         .FirstOrDefaultAsync(c => c.UserUid == uid);
