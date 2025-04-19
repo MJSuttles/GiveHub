@@ -9,62 +9,52 @@ using GiveHub.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Enable legacy DateTime handling for PostgreSQL
+// ✅ Enables legacy timestamp behavior (for compatibility with DateTime)
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-// Get the connection string by name (uses Development override if present)
+// ✅ Configure EF Core to use Npgsql with the connection string from appsettings.json or user secrets
 builder.Services.AddDbContext<GiveHubDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("GiveHub")));
 
-// Optional debug output
-Console.WriteLine("Connection String: " + builder.Configuration.GetConnectionString("GiveHub"));
+// builder.Services.AddDbContext<GiveHubDbContext>(options =>
+//     options.UseNpgsql(builder.Configuration.GetConnectionString("BrianDb")));
 
-// JSON options to prevent circular reference issues
+// ✅ Set the JSON serializer to avoid circular reference issues
 builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
-// ✅ Register CORS policy BEFORE builder.Build()
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        policy
-            .WithOrigins("http://localhost:3000") // Frontend origin
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-    });
-});
-
-// Register repositories and services
+// ✅ Register repositories and services for dependency injection
 builder.Services.AddScoped<IGiveHubCharityRepository, GiveHubCharityRepository>();
 builder.Services.AddScoped<IGiveHubCharityService, GiveHubCharityService>();
 builder.Services.AddScoped<IGiveHubEventRepository, GiveHubEventRepository>();
 builder.Services.AddScoped<IGiveHubEventService, GiveHubEventService>();
 builder.Services.AddScoped<IGiveHubTagRepository, GiveHubTagRepository>();
 builder.Services.AddScoped<IGiveHubTagService, GiveHubTagService>();
+builder.Services.AddScoped<IGiveHubCharityTagService, GiveHubCharityTagService>();
+builder.Services.AddScoped<IGiveHubCharityTagRepository, GiveHubCharityTagRepository>();
 
-// Swagger setup
+// ✅ Swagger / API docs setup
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// ✅ Now we can build the app
 var app = builder.Build();
 
+// ✅ Enable Swagger UI in development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// ✅ Middleware setup
 app.UseHttpsRedirection();
 
-// ✅ Use CORS AFTER building the app
-app.UseCors();
-
+// ✅ Map endpoint groups (routes)
 app.MapCharityEndpoints();
 app.MapEventEndpoints();
 app.MapTagEndpoints();
+app.MapCharityTagEndpoints();
 
 app.Run();

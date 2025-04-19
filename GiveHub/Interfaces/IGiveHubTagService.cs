@@ -13,5 +13,6 @@ namespace GiveHub.Interfaces
 
     // example
     // Task<List<Author>> GetAllAuthorsAsync();
+    Task<List<Tag>> GetAllTagsAsync();
   }
 }
