@@ -40,7 +40,7 @@ namespace GiveHub.Endpoint
       })
       .WithName("GetCharityByUid")
       .WithOpenApi()
-      .Produces<Charity>(StatusCodes.Status200OK);
+      .Produces<List<Charity>>(StatusCodes.Status200OK);
       
       group.MapPost("/", async (Charity charity, IGiveHubCharityService giveHubCharityService) =>
       {

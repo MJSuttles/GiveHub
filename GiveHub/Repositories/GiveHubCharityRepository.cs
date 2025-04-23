@@ -39,13 +39,14 @@ namespace GiveHub.Repositories
       .FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task<Charity?> GetCharityByUidAsync(string uid)
+    public async Task<List<Charity?>> GetCharityByUidAsync(string uid)
     {
       return await _context.Charities
+      .Where(c => c.UserUid == uid)
         .Include(e => e.Events)
         .Include(c => c.CharityTags)
         .ThenInclude(ct => ct.Tag)
-        .FirstOrDefaultAsync(c => c.UserUid == uid);
+        .ToListAsync();
     }
 
     public async Task<Charity> CreateCharityAsync(Charity charity)
