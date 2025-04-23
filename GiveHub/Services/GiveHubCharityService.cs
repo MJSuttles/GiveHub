@@ -44,7 +44,7 @@ namespace GiveHub.Services
       return await _giveHubCharityRepository.GetCharityByIdAsync(id);
     }
 
-    public async Task<Charity?> GetCharityByUidAsync(string uid)
+    public async Task<List<Charity?>> GetCharityByUidAsync(string uid)
     {
       return await _giveHubCharityRepository.GetCharityByUidAsync(uid);
     }
