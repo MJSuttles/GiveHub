@@ -33,7 +33,10 @@ namespace GiveHub.Services
     // To get the value, we use the await keyword.
 
     // seed data
-
+    public async Task<Event> GetEventByIdAsync(int id)
+    {
+      return await _giveHubEventRepository.GetEventByIdAsync(id);
+    }
     public async Task<List<Event>> GetEventsByCharityIdAsync(int charityId)
     {
       return await _giveHubEventRepository.GetEventsByCharityIdAsync(charityId);
