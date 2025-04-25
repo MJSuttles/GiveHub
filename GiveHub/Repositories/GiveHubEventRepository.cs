@@ -22,6 +22,13 @@ namespace GiveHub.Repositories
 
     // seed data
 
+  public async Task<Event> GetEventByIdAsync(int id)
+  {
+    return await _context.Events
+      .Include(e => e.Charity)
+      .ThenInclude(c => c.CharityTags)
+      .FirstOrDefaultAsync(e => e.Id == id);
+  }
   public async Task<List<Event>> GetEventsByCharityIdAsync(int charityId)
   {
   return await _context.Events

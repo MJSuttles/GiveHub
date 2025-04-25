@@ -17,6 +17,13 @@ namespace GiveHub.Endpoint
       var group = routes.MapGroup("/api/events").WithTags(nameof(Event));
 
       // API calls
+      group.MapGet("/{id}", async (int id, IGiveHubEventService giveHubEventService) =>
+      {
+          return await giveHubEventService.GetEventByIdAsync(id);
+      })
+      .WithName("GetEventById")
+      .WithOpenApi()
+      .Produces<Event>(StatusCodes.Status200OK);
 
       group.MapGet("/charity/{charityId}", async (int charityId, IGiveHubEventService giveHubEventService) =>
       {
