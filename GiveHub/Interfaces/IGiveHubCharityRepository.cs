@@ -16,6 +16,6 @@ namespace GiveHub.Interfaces
     Task<Charity> CreateCharityAsync(Charity charity);
     Task<Charity> UpdateCharityAsync(int id, Charity charity);
     Task<Charity> DeleteCharityAsync(int id);
-    
+    Task<List<Charity>> SearchCharitiesByNameAsync(string searchCharities);
   }
 }

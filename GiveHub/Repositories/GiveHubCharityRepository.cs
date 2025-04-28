@@ -85,5 +85,17 @@ namespace GiveHub.Repositories
       }
       return null;
     }
+
+    public async Task<List<Charity>> SearchCharitiesByNameAsync(string searchCharities)
+    {
+      return await _context.Charities
+        .Where(c => c.Name.ToLower().Contains(searchCharities.ToLower()))
+        .Include(e => e.Events)
+        .Include(c => c.CharityTags)
+        .ThenInclude(ct => ct.Tag)
+        .ToListAsync();
+    }
+
+
   }
 }

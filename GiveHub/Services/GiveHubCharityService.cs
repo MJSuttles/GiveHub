@@ -63,5 +63,10 @@ namespace GiveHub.Services
     {
       return await _giveHubCharityRepository.DeleteCharityAsync(id);
     }
+
+    public async Task<List<Charity>> SearchCharitiesByNameAsync(string searchCharities)
+    {
+      return await _giveHubCharityRepository.SearchCharitiesByNameAsync(searchCharities);
+    }
   }
 }

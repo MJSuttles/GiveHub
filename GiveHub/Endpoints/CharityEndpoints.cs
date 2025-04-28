@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using GiveHub.Interfaces;
 using GiveHub.Models;
 
@@ -41,7 +42,7 @@ namespace GiveHub.Endpoint
       .WithName("GetCharityByUid")
       .WithOpenApi()
       .Produces<List<Charity>>(StatusCodes.Status200OK);
-      
+
       group.MapPost("/", async (Charity charity, IGiveHubCharityService giveHubCharityService) =>
       {
         return await giveHubCharityService.CreateCharityAsync(charity);
@@ -67,35 +68,14 @@ namespace GiveHub.Endpoint
       .WithName("DeleteCharity")
       .WithOpenApi()
       .Produces<Charity>(StatusCodes.Status204NoContent);
-      // example
 
-      // group.MapGet("/", async (ISimplyBooksAuthorService simplyBooksAuthorService) =>
-      // {
-      //   return await simplyBooksAuthorService.GetAllAuthorsAsync();
-      // })
-      // .WithName("GetAllAuthors")
-      // .WithOpenApi()
-      // .Produces<List<Author>>(StatusCodes.Status200OK);
-
-      // Status StatusCodes
-
-      // GET Calls:
-
-      // .Produces<List<Author>>(StatusCodes.Status200OK);
-
-      // POST Calls:
-
-      // .Produces<Author>(StatusCodes.Status201Created)
-      // .Produces(StatusCodes.Status400BadRequest);
-
-      // PUT Calls:
-
-      // .Produces<Author>(StatusCodes.Status201Created)
-      // .Produces(StatusCodes.Status400BadRequest);
-
-      // DELETE Calls:
-
-      // .Produces<Author>(StatusCodes.Status204NoContent);
+      group.MapGet("/search", async (string query, IGiveHubCharityService service) =>
+      {
+        var results = await service.SearchCharitiesByNameAsync(query);
+        return Results.Ok(new { charities = results });
+      })
+      .WithName("SearchCharities")
+      .WithOpenApi();
     }
   }
 }
