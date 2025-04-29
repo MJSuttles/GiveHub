@@ -19,7 +19,7 @@ namespace GiveHub.Endpoint
       // API calls
       group.MapGet("/{id}", async (int id, IGiveHubEventService giveHubEventService) =>
       {
-          return await giveHubEventService.GetEventByIdAsync(id);
+        return await giveHubEventService.GetEventByIdAsync(id);
       })
       .WithName("GetEventById")
       .WithOpenApi()
@@ -58,6 +58,14 @@ namespace GiveHub.Endpoint
       .WithName("DeleteEvent")
       .WithOpenApi()
       .Produces<Event>(StatusCodes.Status204NoContent);
+
+      group.MapGet("/search", async (string query, IGiveHubEventService giveHubCharityService) =>
+      {
+        var results = await giveHubCharityService.SearchEventsByNameAsync(query);
+        return Results.Ok(new { events = results });
+      })
+      .WithName("SearchEvents")
+      .WithOpenApi();
     }
   }
 }

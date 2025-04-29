@@ -69,9 +69,9 @@ namespace GiveHub.Endpoint
       .WithOpenApi()
       .Produces<Charity>(StatusCodes.Status204NoContent);
 
-      group.MapGet("/search", async (string query, IGiveHubCharityService service) =>
+      group.MapGet("/search", async (string query, IGiveHubCharityService giveHubCharityService) =>
       {
-        var results = await service.SearchCharitiesByNameAsync(query);
+        var results = await giveHubCharityService.SearchCharitiesByNameAsync(query);
         return Results.Ok(new { charities = results });
       })
       .WithName("SearchCharities")
