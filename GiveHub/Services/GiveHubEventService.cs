@@ -56,5 +56,10 @@ namespace GiveHub.Services
     {
       return await _giveHubEventRepository.DeleteEventAsync(id);
     }
+
+    public async Task<List<Event>> SearchEventsByNameAsync(string searchEvents)
+    {
+      return await _giveHubEventRepository.SearchEventsByNameAsync(searchEvents);
+    }
   }
 }

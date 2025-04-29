@@ -15,5 +15,6 @@ namespace GiveHub.Interfaces
     Task<Event> UpdateEventAsync(int id, Event eventEntity);
     Task<Event> DeleteEventAsync(int id);
     Task<Event> GetEventByIdAsync(int id);
+    Task<List<Event>> SearchEventsByNameAsync(string searchEvents);
   }
 }

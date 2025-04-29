@@ -22,21 +22,21 @@ namespace GiveHub.Repositories
 
     // seed data
 
-  public async Task<Event> GetEventByIdAsync(int id)
-  {
-    return await _context.Events
-      .Include(e => e.Charity)
-      .ThenInclude(c => c.CharityTags)
-      .FirstOrDefaultAsync(e => e.Id == id);
-  }
-  public async Task<List<Event>> GetEventsByCharityIdAsync(int charityId)
-  {
-  return await _context.Events
-    .Where(e => e.CharityId == charityId)
-    .Include(e => e.Charity)
-    .ThenInclude(c => c.CharityTags)
-    .ToListAsync();
-  }
+    public async Task<Event> GetEventByIdAsync(int id)
+    {
+      return await _context.Events
+        .Include(e => e.Charity)
+        .ThenInclude(c => c.CharityTags)
+        .FirstOrDefaultAsync(e => e.Id == id);
+    }
+    public async Task<List<Event>> GetEventsByCharityIdAsync(int charityId)
+    {
+      return await _context.Events
+        .Where(e => e.CharityId == charityId)
+        .Include(e => e.Charity)
+        .ThenInclude(c => c.CharityTags)
+        .ToListAsync();
+    }
 
     public async Task<Event> CreateEventAsync(Event eventEntity)
     {
@@ -76,6 +76,15 @@ namespace GiveHub.Repositories
       _context.Events.Remove(existingEvent);
       await _context.SaveChangesAsync();
       return existingEvent;
+    }
+
+    public async Task<List<Event>> SearchEventsByNameAsync(string searchEvents)
+    {
+      return await _context.Events
+        .Where(e => e.Name.ToLower().Contains(searchEvents.ToLower()))
+        .Include(e => e.Charity)
+        .ThenInclude(c => c.CharityTags)
+        .ToListAsync();
     }
   }
 }
