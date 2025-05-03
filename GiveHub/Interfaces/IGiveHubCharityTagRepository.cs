@@ -14,5 +14,6 @@ namespace GiveHub.Interfaces
     // example
     // Task<List<Author>> GetAllAuthorsAsync();
     Task<CharityTag> CreateCharityTagAsync(CharityTag charityTag);
+    Task<bool> DeleteCharityTagAsync(int charityId, int tagId);
   }
 }

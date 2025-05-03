@@ -30,6 +30,10 @@ namespace GiveHub.Services
       return await _giveHubCharityTagRepository.CreateCharityTagAsync(charityTag);
     }
 
+    public async Task<bool> DeleteCharityTagAsync(int charityId, int tagId)
+    {
+      return await _giveHubCharityTagRepository.DeleteCharityTagAsync(charityId, tagId);
+    }
 
     // async means that the method is asynchronous.
     // async methods can be awaited using the await keyword.

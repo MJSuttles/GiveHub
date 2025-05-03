@@ -27,6 +27,16 @@ namespace GiveHub.Repositories
       return charityTag;
     }
 
+    public async Task<bool> DeleteCharityTagAsync(int charityId, int tagId)
+    {
+      var charityTag = await _context.CharityTags.FindAsync(charityId, tagId);
+      if (charityTag == null) return false;
+
+      _context.CharityTags.Remove(charityTag);
+      await _context.SaveChangesAsync();
+      return true;
+    }
+
     
     // seed data
 
