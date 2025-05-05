@@ -39,6 +39,15 @@ namespace GiveHub.Endpoint
     .Produces(StatusCodes.Status204NoContent)
     .Produces(StatusCodes.Status404NotFound);
 
+    group.MapDelete("/charity/{charityId}", async (int charityId, IGiveHubCharityTagService giveHubCharityTagService) =>
+    {
+        await giveHubCharityTagService.DeleteAllCharityTagsByCharityIdAsync(charityId);
+        return Results.NoContent();
+    })
+    .WithName("DeleteAllCharityTagsByCharityId")
+    .WithOpenApi()
+    .Produces(StatusCodes.Status204NoContent);
+
       // group.MapGet("/", async (ISimplyBooksAuthorService simplyBooksAuthorService) =>
       // {
       //   return await simplyBooksAuthorService.GetAllAuthorsAsync();
