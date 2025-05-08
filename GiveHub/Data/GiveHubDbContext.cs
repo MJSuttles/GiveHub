@@ -9,6 +9,8 @@ namespace GiveHub.Data
     public DbSet<Event> Events { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<CharityTag> CharityTags { get; set; }
+    public DbSet<Quote> Quotes { get; set; }
+    
 
     public GiveHubDbContext(DbContextOptions<GiveHubDbContext> context) : base(context) { }
 

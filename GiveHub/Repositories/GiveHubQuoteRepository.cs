@@ -20,8 +20,15 @@ namespace GiveHub.Repositories
       _context = context;
     }
 
-    // seed data
-
+    // seed datapublic async Task<Quote> GetRandomQuoteAsync()
+    public async Task<Quote> GetRandomQuoteAsync()
+    {
+        var count = await _context.Quotes.CountAsync(); // Get total count of quotes
+        var randomIndex = new Random().Next(0, count); // Generate a random index
+        var randomQuote = await _context.Quotes.Skip(randomIndex).FirstOrDefaultAsync(); // Get a random quote based on index
+        
+        return randomQuote;
+    }
 
   }
 }

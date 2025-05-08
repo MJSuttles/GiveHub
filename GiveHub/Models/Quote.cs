@@ -6,6 +6,7 @@ namespace GiveHub.Models
 {
   public class Quote
   {
-    // seed data
+    public int Id { get; set; }
+    public string Sentences { get; set; }
   }
 }
