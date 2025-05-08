@@ -40,8 +40,10 @@ builder.Services.AddScoped<IGiveHubEventRepository, GiveHubEventRepository>();
 builder.Services.AddScoped<IGiveHubEventService, GiveHubEventService>();
 builder.Services.AddScoped<IGiveHubTagRepository, GiveHubTagRepository>();
 builder.Services.AddScoped<IGiveHubTagService, GiveHubTagService>();
-builder.Services.AddScoped<IGiveHubCharityTagService, GiveHubCharityTagService>();
 builder.Services.AddScoped<IGiveHubCharityTagRepository, GiveHubCharityTagRepository>();
+builder.Services.AddScoped<IGiveHubCharityTagService, GiveHubCharityTagService>();
+builder.Services.AddScoped<IGiveHubQuoteRepository, GiveHubQuoteRepository>();
+builder.Services.AddScoped<IGiveHubQuoteService, GiveHubQuoteService>();
 
 // ✅ Swagger / API docs setup
 builder.Services.AddEndpointsApiExplorer();
@@ -66,5 +68,6 @@ app.MapCharityEndpoints();
 app.MapEventEndpoints();
 app.MapTagEndpoints();
 app.MapCharityTagEndpoints();
+app.MapQuoteEndpoints();
 
 app.Run();
