@@ -34,6 +34,7 @@ namespace GiveHub.Data
       modelBuilder.Entity<Event>().HasData(EventData.Events);
       modelBuilder.Entity<Tag>().HasData(TagData.Tags);
       modelBuilder.Entity<CharityTag>().HasData(CharityTagData.CharityTags);
+      modelBuilder.Entity<Quote>().HasData(QuoteData.Quotes);
     }
   }
 }
