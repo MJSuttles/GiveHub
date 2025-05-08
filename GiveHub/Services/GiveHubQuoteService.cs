@@ -25,6 +25,11 @@ namespace GiveHub.Services
       _giveHubQuoteRepository = giveHubQuoteRepository;
     }
 
+    public async Task<Quote> GetRandomQuoteAsync()
+    {
+        return await _giveHubQuoteRepository.GetRandomQuoteAsync();
+    }
+
     // async means that the method is asynchronous.
     // async methods can be awaited using the await keyword.
     // async methods return a Task or Task<T>.

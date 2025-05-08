@@ -9,6 +9,8 @@ namespace GiveHub.Data
     public DbSet<Event> Events { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<CharityTag> CharityTags { get; set; }
+    public DbSet<Quote> Quotes { get; set; }
+    
 
     public GiveHubDbContext(DbContextOptions<GiveHubDbContext> context) : base(context) { }
 
@@ -32,6 +34,7 @@ namespace GiveHub.Data
       modelBuilder.Entity<Event>().HasData(EventData.Events);
       modelBuilder.Entity<Tag>().HasData(TagData.Tags);
       modelBuilder.Entity<CharityTag>().HasData(CharityTagData.CharityTags);
+      modelBuilder.Entity<Quote>().HasData(QuoteData.Quotes);
     }
   }
 }

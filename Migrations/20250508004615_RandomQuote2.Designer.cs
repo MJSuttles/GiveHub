@@ -3,6 +3,7 @@ using System;
 using GiveHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GiveHub.Migrations
 {
     [DbContext(typeof(GiveHubDbContext))]
-    partial class GiveHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250508004615_RandomQuote2")]
+    partial class RandomQuote2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -387,25 +390,13 @@ namespace GiveHub.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Sentence")
+                    b.Property<string>("Sentences")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("Quotes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Sentence = "The best way to find yourself is to lose yourself in the service of others."
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Sentence = "Success is not the key to happiness. Happiness is the key to success."
-                        });
                 });
 
             modelBuilder.Entity("GiveHub.Models.Tag", b =>

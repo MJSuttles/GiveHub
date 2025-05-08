@@ -16,6 +16,16 @@ namespace GiveHub.Endpoint
     {
       var group = routes.MapGroup("/api/quotes").WithTags(nameof(Tag));
 
+      group.MapGet("/randomquote", async (IGiveHubQuoteService giveHubQuoteService) =>
+      {
+          var randomQuote = await giveHubQuoteService.GetRandomQuoteAsync();
+          return randomQuote is not null ? Results.Ok(randomQuote) : Results.NotFound();
+      })
+      .WithName("GetRandomQuote")
+      .WithOpenApi()
+      .Produces<Quote>(StatusCodes.Status200OK)
+      .Produces(StatusCodes.Status404NotFound);
+
       // API calls
 
       // example
