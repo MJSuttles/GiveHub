@@ -67,7 +67,6 @@ app.UseCors();
 app.MapCharityEndpoints();
 app.MapEventEndpoints();
 app.MapTagEndpoints();
-app.MapQuoteEndpoints();
 app.MapCharityTagEndpoints();
 app.MapQuoteEndpoints();
 
