@@ -12,7 +12,7 @@ namespace GiveHub.Endpoint
     // We must register this MapWeatherEndpoints method in the Program.cs file.
     // You can click the reference to see where it is registered in the Program.cs file.
 
-    public static void MapTagEndpoints(this IEndpointRouteBuilder routes)
+    public static void MapQuoteEndpoints(this IEndpointRouteBuilder routes)
     {
       var group = routes.MapGroup("/api/quotes").WithTags(nameof(Tag));
 
